@@ -18,12 +18,12 @@ defmodule ElxlogTest do
       [{:N, 1}, 3]
     ]
 
-    assert Prove.deref({:A1, 3}, env) == 1
-    assert Prove.deref([:+, {:A1, 3}, 3], env) == [:+, 1, 3]
-    assert Prove.deref(:X, env) == :X
-    assert Prove.deref({:B, 2}, env) == {:B, 2}
-    assert Prove.eval([:+, {:A1, 3}, 3], env) == 4
-    assert Prove.eval([:-, {:A1, 3}, 3], env) == -2
+    assert Elxlog.Prove.deref({:A1, 3}, env) == 1
+    assert Elxlog.Prove.deref([:+, {:A1, 3}, 3], env) == [:+, 1, 3]
+    assert Elxlog.Prove.deref(:X, env) == :X
+    assert Elxlog.Prove.deref({:B, 2}, env) == {:B, 2}
+    assert Elxlog.Prove.eval([:+, {:A1, 3}, 3], env) == 4
+    assert Elxlog.Prove.eval([:-, {:A1, 3}, 3], env) == -2
   end
 
   test "alpha_conv" do
@@ -37,7 +37,7 @@ defmodule ElxlogTest do
       ]
     ]
 
-    assert Prove.alpha_conv(clause, 1) == [
+    assert Elxlog.Prove.alpha_conv(clause, 1) == [
              :clause,
              [:pred, [:fact, {:N, 1}, {:A, 1}]],
              [
@@ -53,7 +53,7 @@ defmodule ElxlogTest do
       [[:pred, [:append, :Ls, :Ys, :Zs]]]
     ]
 
-    assert Prove.alpha_conv(clause1, 2) == [
+    assert Elxlog.Prove.alpha_conv(clause1, 2) == [
              :clause,
              [
                :pred,
@@ -97,14 +97,14 @@ defmodule ElxlogTest do
   end
 
   test "unify" do
-    assert Prove.unify([], [], []) == []
-    assert Prove.unify([1], [], []) == false
-    assert Prove.unify([], [1], []) == false
-    assert Prove.unify([1], [1], []) == []
-    assert Prove.unify([:pred, [:foo, 1, 2]], [:pred, [:foo, :X, :Y]], []) == [[:Y, 2], [:X, 1]]
-    assert Prove.unify([:pred, [:foo, 1, 2]], [:pred, [:foo, :X, 3]], []) == false
+    assert Elxlog.Prove.unify([], [], []) == []
+    assert Elxlog.Prove.unify([1], [], []) == false
+    assert Elxlog.Prove.unify([], [1], []) == false
+    assert Elxlog.Prove.unify([1], [1], []) == []
+    assert Elxlog.Prove.unify([:pred, [:foo, 1, 2]], [:pred, [:foo, :X, :Y]], []) == [[:Y, 2], [:X, 1]]
+    assert Elxlog.Prove.unify([:pred, [:foo, 1, 2]], [:pred, [:foo, :X, 3]], []) == false
 
-    assert Prove.unify([:pred, [:foo, 1, 2]], [:pred, [:foo, {:X, 1}, {:Y, 1}]], []) == [
+    assert Elxlog.Prove.unify([:pred, [:foo, 1, 2]], [:pred, [:foo, {:X, 1}, {:Y, 1}]], []) == [
              [{:Y, 1}, 2],
              [{:X, 1}, 1]
            ]

@@ -11,9 +11,9 @@ defmodule Elxlog do
   defp repl1(def) do
     try do
       IO.write("?- ")
-      {s, _} = Read.parse([], :stdin)
+      {s, _} = Elxlog.Read.parse([], :stdin)
       s1 = add_ask(s)
-      {s2, _, def1} = Prove.prove_all(s1, [], def, 1)
+      {s2, _, def1} = Elxlog.Prove.prove_all(s1, [], def, 1)
       Elxlog.Print.print(s2)
       repl1(def1)
     catch
@@ -206,8 +206,8 @@ defmodule Elxlog do
   """
   def bar(str) do
     def = []
-    {s, _} = Read.parse(Read.tokenize(str, :stdin), :stdin)
-    {s1, _, _} = Prove.prove_all([s], [], def, 1)
+    {s, _} = Elxlog.Read.parse(Elxlog.Read.tokenize(str, :stdin), :stdin)
+    {s1, _, _} = Elxlog.Prove.prove_all([s], [], def, 1)
     Elxlog.Print.print(s1)
   end
 end

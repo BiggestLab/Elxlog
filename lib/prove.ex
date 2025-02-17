@@ -1,13 +1,13 @@
-defmodule Worker do
+defmodule Elxlog.Worker do
   def prove_all do
     receive do
-      {sender, {x, env, def, n}} -> send(sender, {:answer, [x, Prove.prove(x, [], env, def, n)]})
+      {sender, {x, env, def, n}} -> send(sender, {:answer, [x, Elxlog.Prove.prove(x, [], env, def, n)]})
     end
   end
 end
 
 # ----------------prove-----------------------------------
-defmodule Prove do
+defmodule Elxlog.Prove do
   @moduledoc """
   Prove Horn clause with SLD resolution
   """
@@ -19,9 +19,9 @@ defmodule Prove do
   env is environment. It is keyword-list
   n is nest level. Alpha conversion uses n to generate new variable.
   ## example
-  iex>Prove.prove([:builtin,[:true]],[],[],[],0)
+  iex>Elxlog.Prove.prove([:builtin,[:true]],[],[],[],0)
   {true,[],[]}
-  iex>Prove.prove([:builtin,[:fail]],[],[],[],0)
+  iex>Elxlog.Prove.prove([:builtin,[:fail]],[],[],[],0)
   {false,[],[]}
   """
   def prove([:pred, x], y, env, def, n) do
@@ -529,7 +529,7 @@ defmodule Prove do
       end
 
       codelist = String.split(string, "!elixir")
-      buf = hd(codelist) |> Read.tokenize(:filein)
+      buf = hd(codelist) |> Elxlog.Read.tokenize(:filein)
       def1 = reconsult(buf, [])
 
       if length(codelist) == 2 do
@@ -562,7 +562,7 @@ defmodule Prove do
     end
 
     codelist = String.split(string, "!elixir")
-    buf = hd(codelist) |> Read.tokenize(:filein)
+    buf = hd(codelist) |> Elxlog.Read.tokenize(:filein)
     def1 = reconsult(buf, []) |> Enum.reverse()
 
     if length(codelist) == 2 do
@@ -578,7 +578,7 @@ defmodule Prove do
 
   def prove_builtin([:read, x], y, env, def, n) do
     x1 = deref(x, env)
-    {s, _} = Read.parse([], :stdin)
+    {s, _} = Elxlog.Read.parse([], :stdin)
     env1 = unify(x1, s, env)
     prove_all(y, env1, def, n + 1)
   end
@@ -835,7 +835,7 @@ defmodule Prove do
   end
 
   def parallel1([x | xs], env, def, n) do
-    pid = spawn(Worker, :prove_all, [])
+    pid = spawn(Elxlog.Worker, :prove_all, [])
     def1 = Keyword.put(def, :parallel, false)
     send(pid, {self(), {x, env, def1, n}})
     parallel1(xs, env, def, n)
@@ -915,7 +915,7 @@ defmodule Prove do
   end
 
   def reconsult(buf, def) do
-    {s, buf1} = Read.parse(buf, :filein)
+    {s, buf1} = Elxlog.Read.parse(buf, :filein)
 
     if Elxlog.is_pred(s) do
       [_, [name | _]] = s

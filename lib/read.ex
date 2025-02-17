@@ -1,7 +1,7 @@
 # ---------------read----------------------------------
-defmodule Read do
+defmodule Elxlog.Read do
   @moduledoc """
-  Read module is input functions of Elxlog.
+  Elxlog.Read module is input functions of Elxlog.
 
   main function is parse/2
   parse/2 recieve string from stdio or file 
@@ -11,13 +11,13 @@ defmodule Read do
 
   @doc """
   lowercase or number char or underbar
-  iex> Read.is_atom_str("asdf")
+  iex> Elxlog.Read.is_atom_str("asdf")
   true
-  iex> Read.is_atom_str("asdf123")
+  iex> Elxlog.Read.is_atom_str("asdf123")
   true
-  iex> Read.is_atom_str("asdf_abc")
+  iex> Elxlog.Read.is_atom_str("asdf_abc")
   true
-  iex> Read.is_atom_str("Asdf")
+  iex> Elxlog.Read.is_atom_str("Asdf")
   false
   """
   def is_atom_str(x) do
@@ -36,9 +36,9 @@ defmodule Read do
   end
 
   @doc """
-  iex> Read.is_builtin_str("halt")
+  iex> Elxlog.Read.is_builtin_str("halt")
   true
-  iex> Read.is_builtin_str("halz")
+  iex> Elxlog.Read.is_builtin_str("halz")
   false
   """
   def is_builtin_str(x) do
@@ -96,9 +96,9 @@ defmodule Read do
 
   @doc """
   if prefix of str is elx_ it is Elixir function fname
-  iex> Read.is_elixir_func_str("elx_foo")
+  iex> Elxlog.Read.is_elixir_func_str("elx_foo")
   true
-  iex> Read.is_elixir_func_str("foo")
+  iex> Elxlog.Read.is_elixir_func_str("foo")
   false
   """
   def is_elixir_func_str(x) do
@@ -111,7 +111,7 @@ defmodule Read do
   end
 
   @doc """
-  iex(1)> Read.elixir_name("elx_foo")
+  iex(1)> Elxlog.Read.elixir_name("elx_foo")
   "foo"
   """
   def elixir_name(x) do
@@ -122,9 +122,9 @@ defmodule Read do
   @doc """
   if head charactor is upper case it is variable
   if head charactor is underbar it is variable
-  iex> Read.is_var_str("Abc")
+  iex> Elxlog.Read.is_var_str("Abc")
   true
-  iex> Read.is_var_str("abc")
+  iex> Elxlog.Read.is_var_str("abc")
   false
   """
   def is_var_str(x) do
@@ -173,7 +173,7 @@ defmodule Read do
   end
 
   @doc """
-  parse/2 is main function in Read module
+  parse/2 is main function in Elxlog.Read module
   1st arg is tokenized list data e.g. ["1","+","2"]
   2nd arg is :sidio or file 
   return lited predicate ot clause data 
@@ -883,11 +883,11 @@ defmodule Read do
 
   @doc """
   atom + - is separated by tokenizer, thus + - is meaningless
-  iex>Read.is_integer_str("123")
+  iex>Elxlog.Read.is_integer_str("123")
   true
-  iex>Read.is_integer_str("+123")
+  iex>Elxlog.Read.is_integer_str("+123")
   true
-  iex>Read.is_integer_str("-123")
+  iex>Elxlog.Read.is_integer_str("-123")
   true
   """
   def is_integer_str(x) do
@@ -919,11 +919,11 @@ defmodule Read do
   end
 
   @doc """
-  iex>Read.is_float_str("123")
+  iex>Elxlog.Read.is_float_str("123")
   false
-  iex>Read.is_float_str("123.45")
+  iex>Elxlog.Read.is_float_str("123.45")
   true
-  iex>Read.is_float_str("3.0e1")
+  iex>Elxlog.Read.is_float_str("3.0e1")
   true
   """
   def is_float_str(x) do
