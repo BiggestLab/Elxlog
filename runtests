@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+time MIX_ENV=test mix coveralls.html

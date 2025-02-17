@@ -30,7 +30,8 @@ defmodule Elxlog.MixProject do
         maintainers: ["Kenichi Sasagawa"],
         licenses: ["modified BSD"],
         links: %{"GitHub" => "https://github.com/sasagawa888/Elxlog"}
-      ]
+      ],
+      test_coverage: [tool: ExCoveralls, threshold: 60],
     ]
   end
 
@@ -44,7 +45,8 @@ defmodule Elxlog.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_doc, "~> 0.21", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.21", only: :dev, runtime: false},
+      {:excoveralls, "~> 0.18", only: :test},
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
     ]
