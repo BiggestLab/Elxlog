@@ -14,7 +14,7 @@ defmodule Elxlog do
       {s, _} = Read.parse([], :stdin)
       s1 = add_ask(s)
       {s2, _, def1} = Prove.prove_all(s1, [], def, 1)
-      Print.print(s2)
+      Elxlog.Print.print(s2)
       repl1(def1)
     catch
       x ->
@@ -187,7 +187,7 @@ defmodule Elxlog do
   end
 
   defp error1([x | xs]) do
-    Print.print1(x)
+    Elxlog.Print.print1(x)
     IO.write(" ")
     error1(xs)
   end
@@ -208,6 +208,6 @@ defmodule Elxlog do
     def = []
     {s, _} = Read.parse(Read.tokenize(str, :stdin), :stdin)
     {s1, _, _} = Prove.prove_all([s], [], def, 1)
-    Print.print(s1)
+    Elxlog.Print.print(s1)
   end
 end

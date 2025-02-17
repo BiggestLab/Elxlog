@@ -3,5 +3,5 @@ defmodule PrologTest do
   doctest Elxlog
   doctest Read
   doctest Prove
-  doctest Print
+  doctest Elxlog.Print
 end

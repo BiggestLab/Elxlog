@@ -119,7 +119,7 @@ defmodule Prove do
       IO.write(" ")
       IO.write(action)
       IO.write(" ")
-      Print.print1(deref(x, env))
+      Elxlog.Print.print1(deref(x, env))
       trace1(env, def)
     end
   end
@@ -131,7 +131,7 @@ defmodule Prove do
       true
     else
       if msg == "e\n" do
-        Print.print_env(env)
+        Elxlog.Print.print_env(env)
         trace1(env, def)
       else
         if msg == "l\n" do
@@ -615,7 +615,7 @@ defmodule Prove do
 
   def prove_builtin([:write, x], y, env, def, n) do
     x1 = deref(x, env)
-    Print.print1(x1)
+    Elxlog.Print.print1(x1)
     prove_all(y, env, def, n + 1)
   end
 
@@ -896,13 +896,13 @@ defmodule Prove do
   def ask([x], env) do
     IO.write(x)
     IO.write(" = ")
-    Print.print1(deref(x, env))
+    Elxlog.Print.print1(deref(x, env))
   end
 
   def ask([x | xs], env) do
     IO.write(x)
     IO.write(" = ")
-    Print.print(deref(x, env))
+    Elxlog.Print.print(deref(x, env))
     ask(xs, env)
   end
 
@@ -956,7 +956,7 @@ defmodule Prove do
   end
 
   def listing1([x | xs]) do
-    Print.print(x)
+    Elxlog.Print.print(x)
     listing1(xs)
   end
 
@@ -989,7 +989,7 @@ defmodule Prove do
   end
 
   def debug1([x | xs]) do
-    Print.print_debug(x)
+    Elxlog.Print.print_debug(x)
     debug1(xs)
   end
 

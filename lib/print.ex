@@ -1,5 +1,5 @@
 # ----------------print------------
-defmodule Print do
+defmodule Elxlog.Print do
   @moduledoc """
   Print module is output functions for Elxlog
   """
