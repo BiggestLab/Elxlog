@@ -34,8 +34,7 @@ defmodule Print do
     end
   end
 
-  def print1(x) when is_tuple(x) do
-    {a, n} = x
+  def print1({a, n}) do
     IO.write(a)
     IO.write("{")
     IO.write(n)
@@ -127,8 +126,7 @@ defmodule Print do
     IO.write("]")
   end
 
-  defp print_list1(x) when is_tuple(x) do
-    {a, n} = x
+  defp print_list1({a, n}) do
     IO.write(a)
     IO.write("{")
     IO.write(n)
